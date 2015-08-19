@@ -1,0 +1,35 @@
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0" ng-controller="NavigationController as navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#/">Synyzapo</a>
+    </div>
+
+    <ul class="nav navbar-right top-nav">
+        <li class="dropdown">
+            <a class="dropdown-toggle hand-cursor" data-toggle="dropdown">
+                <i class="fa fa-fw fa-key"></i> Login <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="#login" class="dropdown-toggle hand-cursor" data-toggle="dropdown">Login as user</a>
+                </li>
+                <li>
+                    <a href="#organization-login" class="dropdown-toggle hand-cursor" data-toggle="dropdown">Login as organization</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    
+    <ul class="nav navbar-right top-nav left">
+        <li class="dropdown">
+            <a href="#add-organization" class="dropdown-toggle hand-cursor" data-toggle="dropdown">
+                Add your organization
+            </a>
+        </li>
+    </ul>
+</nav>

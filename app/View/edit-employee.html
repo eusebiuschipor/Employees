@@ -1,0 +1,40 @@
+<div id="wrapper">
+    <navigation></navigation>
+
+    <div id="page-wrapper">
+        <div class="container-fluid" id="employees">
+            
+            <h2 class="form-signin-heading">Edit employee</h2>
+
+            <div ng-controller="AddEmployeeController as addEmployee" ng-init="addEmployee.getEmployeeInformation()">
+                <form class="form-add-people" name="addEmployeeForm">
+                    <label for="inputName">Name:</label> 			
+                    <span style="color:red" ng-show="addEmployeeForm.name.$invalid">
+                        <br /> <span ng-show="addEmployeeForm.name.$error.required">Name is required.</span> 
+                    </span>
+                    <input class="form-control" type="text" name="name" ng-model="addEmployee.addEmployeeForm.name" required> <br/>
+
+                    <label for="inputAddress">Address:</label> 
+                    <input class="form-control" type="text" name="address" ng-model="addEmployee.addEmployeeForm.address" required> <br/>    
+
+                    <br /> <label for="inputEmail">Email:</label> 
+                    <span style="color:red" ng-show="addEmployeeForm.email.$invalid">
+                        <br /><span ng-show="addEmployeeForm.email.$error.required">Email is required.</span> 
+                        <span ng-show="addEmployeeForm.email.$error.email">Invalid email address.</span>
+                    </span>
+                    <input class="form-control" name="email" type="email" ng-model="addEmployee.addEmployeeForm.email" required><br>   
+
+                    <label for="inputJobTitle">Job Title:</label>    
+                    <span style="color:red" ng-show="addEmployeeForm.jobTitle.$invalid">
+                        <br /> <span ng-show="addEmployeeForm.jobTitle.$error.required">Job title is required.</span> 
+                    </span>
+                    <select class="form-control" name="jobTitle" ng-model="addEmployee.addEmployeeForm.jobTitle" required>
+                        <option ng-repeat="job in addEmployee.getAllJobs()" ng-value="{{ job.id }}">{{ job.title }}</option>
+                    </select> <br/>    
+
+                    <button class="btn btn-lg btn-primary" ng-click="addEmployee.submitTheForm()" ng-disabled="addEmployeeForm.$invalid">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

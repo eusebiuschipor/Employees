@@ -1,0 +1,38 @@
+<div id="wrapper">
+    <navigation></navigation>
+
+    <div id="page-wrapper" ng-controller="EmployeesController as employees">
+
+    	<div class="search">
+    		<div class="filter">
+		 		<label for="name">Name:</label> 	
+		 		<input type="text" ng-model="search.name" class="form-control">
+		 	</div>
+	 	</div> 
+
+        <table data-toggle="table" class="default-table center">
+		    <thead>
+			    <tr>
+			        <th>Nr.</th>
+			        <th>Name</th>
+			        <th>Email</th>
+			        <th>Job Title</th>
+			        <th>Address</th>
+			    </tr>
+		    </thead>
+		    <tbody>
+			    <tr ng-repeat="employee in employees.getAllEmployees() | filter:search">
+			    	<td class="column-1">{{ employee.nr }}</td>
+			        <td class="column-2">
+			        	<a href="#/edit-employee/{{ employee.id }}">
+			        		{{ employee.name }}
+			        	</a>
+			        </td>
+			        <td class="column-1">{{ employee.email }}</td>
+			        <td class="column-2">{{ employee.jobTitle }}</td>
+			        <td class="column-2">{{ employee.address }}</td>
+			    </tr>
+		    </tbody>
+		</table>
+    </div>
+</div>
