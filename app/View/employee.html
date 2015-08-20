@@ -1,0 +1,25 @@
+<div id="wrapper">
+    <navigation></navigation>
+
+    <div id="page-wrapper">
+        <div class="container-fluid" id="peoples">
+			<div ng-controller="EmployeeDescriptionController as employeeDescription" ng-init="employeeDescription.getEmployeeInformations();">
+				<div class="col-lg-12">
+					<div class="people-information-container">
+						<div class="name">{{ employeeDescription.employeeInformations.name }}</div>
+
+						<div class="photo">
+							<img ng-src="{{ employeeDescription.defaultEmployeeImage }}" />
+						</div>
+
+						<ul class="informations">
+							<li> <strong> Address: </strong> {{ employeeDescription.employeeInformations.address }} </li>
+							<li> <strong> Address: </strong> {{ employeeDescription.employeeInformations.email }} </li>
+							<li> <strong> Address: </strong> {{ employeeDescription.employeeInformations.jobTitle }} </li>
+						</ul>
+					</div>
+				</div>
+			</div>
+        </div>
+    </div>
+</div>

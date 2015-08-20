@@ -1,7 +1,7 @@
 function Global() { }
 
 // HOST:
-Global.host = 'http://localhost/AngularJS/';
+Global.host = 'http://localhost/Employees/';
 
 // TEMPLATES:
 Global.templatesUrl = 'templates/';
@@ -19,6 +19,9 @@ Global.backend = 'backend/';
 Global.getAllEmployees = Global.host + Global.backend + 'employees/';
 Global.addEmployee = Global.host + Global.backend + 'employees/register/';
 Global.getEmployeeInformations = Global.host + Global.backend + 'employees/edit/';
+Global.deleteEmployee = Global.host + Global.backend + 'employees/delete/';
+Global.getEmployeeDescription = Global.host + Global.backend + 'employees/view/';
+Global.employeeImageSrc = 'assets/images/default.png';
 
 // Jobs Module
 Global.getAllJobs = Global.host + Global.backend + 'jobs/';

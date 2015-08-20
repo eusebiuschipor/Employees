@@ -14,7 +14,7 @@
                         employee.nr = i + 1;
                         employee.id = data[i]['employees']['id'];
                         employee.name = data[i]['employees']['name'];
-                        employee.jobTitle = data[i]['employees']['job_title'];
+                        employee.jobTitle = data[i]['jobs']['title'];
                         employee.email = data[i]['employees']['email'];
                         employee.address = data[i]['employees']['address'];
                         employeesList.push(employee);
@@ -32,16 +32,45 @@
         }
     }]);
 
-    app.controller('EmployeesController', ['$scope', '$http', '$window', 'GetAllEmployees', function($scope, $http, $window, GetAllEmployees) {
+    app.controller('EmployeesController', ['$scope', '$http', '$window', 'GetAllEmployees', 'Form', function($scope, $http, $window, GetAllEmployees, Form) {
         var employees = new Array();
 
         this.getAllEmployees = function() {
             return employees;
         }
 
+        this.deleteEmployee = function(employeeId) {
+            dataObject = {
+                id: employeeId
+            }
+
+            Form.sendDataToServer(Global.deleteEmployee, dataObject);
+        }
+
         GetAllEmployees.get(function() {
             employees = GetAllEmployees.getEmployeesList();
         });
+    }]);
+
+    app.controller('EmployeeDescriptionController', ['$scope', '$http', '$window', '$routeParams', function($scope, $http, $window, $routeParams) {
+        this.employeeInformations = {};
+        this.defaultEmployeeImage = Global.employeeImageSrc;
+
+        var self = this,
+            employeeId = $routeParams.employeeId;
+
+        this.getEmployeeInformations = function() {
+            $http.get(Global.getEmployeeDescription + employeeId)
+                .success(function(data, status, headers, config) {
+                    self.employeeInformations.name = data[0]['employees']['name'];
+                    self.employeeInformations.address = data[0]['employees']['address'];
+                    self.employeeInformations.email = data[0]['employees']['email'];
+                    self.employeeInformations.jobTitle = data[0]['jobs']['title'];
+                })
+                .error(function(data, status, headers, config) {
+                    console.log('error');
+                });
+        }
     }]);
 
     app.controller('AddEmployeeController', ['$scope', '$http', '$location', '$routeParams', 'GetAllJobs', 'Form', function($scope, $http, $location, $routeParams, GetAllJobs, Form){
@@ -74,7 +103,6 @@
         this.getEmployeeInformation = function() {
             $http.get(Global.getEmployeeInformations + employeeId)
                 .success(function(data, status, headers, config) {
-                    console.log(data);
                     self.addEmployeeForm.name = data[0]['employees']['name'];
                     self.addEmployeeForm.email = data[0]['employees']['email'];
                     self.addEmployeeForm.address = data[0]['employees']['address'];
