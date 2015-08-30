@@ -21,10 +21,10 @@
 			    </tr>
 		    </thead>
 		    <tbody>
-			    <tr ng-repeat="employee in employees.getAllEmployees() | filter:search">
+			    <tr ng-repeat="employee in getAllEmployees() | filter:search">
 			    	<td class="column-1">{{ employee.nr }}</td>
 			        <td class="column-2">
-			        	<a ng-click="employees.deleteEmployee(employee.id)" class="pointer">
+			        	<a ng-click="deleteEmployee(employee.id)" class="pointer">
 			        		{{ employee.name }}
 			        	</a>
 			        </td>

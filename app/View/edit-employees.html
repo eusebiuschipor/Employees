@@ -21,7 +21,7 @@
 			    </tr>
 		    </thead>
 		    <tbody>
-			    <tr ng-repeat="employee in employees.getAllEmployees() | filter:search">
+			    <tr ng-repeat="employee in getAllEmployees() | filter:search">
 			    	<td class="column-1">{{ employee.nr }}</td>
 			        <td class="column-2">
 			        	<a href="#/edit-employee/{{ employee.id }}">

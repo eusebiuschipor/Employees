@@ -3,19 +3,19 @@
 
     <div id="page-wrapper">
         <div class="container-fluid" id="peoples">
-			<div ng-controller="EmployeeDescriptionController as employeeDescription" ng-init="employeeDescription.getEmployeeInformations();">
+			<div ng-controller="EmployeeDescriptionController as employeeDescription">
 				<div class="col-lg-12">
 					<div class="people-information-container">
-						<div class="name">{{ employeeDescription.employeeInformations.name }}</div>
+						<div class="name">{{ employeeInformations.name }}</div>
 
 						<div class="photo">
-							<img ng-src="{{ employeeDescription.defaultEmployeeImage }}" />
+							<img ng-src="{{ defaultEmployeeImage }}" />
 						</div>
 
 						<ul class="informations">
-							<li> <strong> Address: </strong> {{ employeeDescription.employeeInformations.address }} </li>
-							<li> <strong> Address: </strong> {{ employeeDescription.employeeInformations.email }} </li>
-							<li> <strong> Address: </strong> {{ employeeDescription.employeeInformations.jobTitle }} </li>
+							<li> <strong> Address: </strong> {{ employeeInformations.address }} </li>
+							<li> <strong> Email: </strong> {{ employeeInformations.email }} </li>
+							<li> <strong> Job Title: </strong> {{ employeeInformations.jobTitle }} </li>
 						</ul>
 					</div>
 				</div>

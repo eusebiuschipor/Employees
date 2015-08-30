@@ -4,6 +4,10 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+html, body, #wrapper, #page-wrapper, .view {
+    height: 100%;
+}
+
 body {
     background-color: #f8f8f8;
 }
@@ -494,7 +498,6 @@ table.default-table .column-3 {
 }
 
 .search {
-    float: left;
     font-weight: bold;
     margin-top: 10px;
     margin-bottom: 10px;

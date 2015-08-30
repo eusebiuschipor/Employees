@@ -11,6 +11,7 @@
 
                     for (var i = 0; i < data.length; i++) {
                         var job = new Object();
+                        job.id = data[i]['Job']['id'];
                         job.title = data[i]['Job']['title'];
                         jobsList.push(job);
                     }

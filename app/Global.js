@@ -34,4 +34,4 @@ Global.httpUnauthorized = 401;
 Global.httpOk = 200;
 
 // Routes
-Global.pageNotFound = '/404';
+Global.pageNotFound = '/employees';

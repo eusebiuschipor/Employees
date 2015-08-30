@@ -32,14 +32,37 @@
         }
     }]);
 
+    app.service('GetEmployeeInformations', ['$http', '$window', function ($http, $window) {
+        var employeeInformations = {};
+
+        this.get = function(callback, employeeId) {
+            $http.get(Global.getEmployeeInformations + employeeId)
+                .success(function(data, status, headers, config) {
+                    employeeInformations.name = data[0]['employees']['name'];
+                    employeeInformations.email = data[0]['employees']['email'];
+                    employeeInformations.address = data[0]['employees']['address'];
+                    employeeInformations.jobTitle = data[0]['employees']['job_title'];
+
+                    callback();
+                })
+                .error(function(data, status, headers, config) {
+                    console.log('error');
+                });
+        }
+
+        this.getEmployeeInformations =  function() {
+            return employeeInformations;
+        }
+    }]);
+
     app.controller('EmployeesController', ['$scope', '$http', '$window', 'GetAllEmployees', 'Form', function($scope, $http, $window, GetAllEmployees, Form) {
         var employees = new Array();
 
-        this.getAllEmployees = function() {
+        $scope.getAllEmployees = function() {
             return employees;
         }
 
-        this.deleteEmployee = function(employeeId) {
+        $scope.deleteEmployee = function(employeeId) {
             dataObject = {
                 id: employeeId
             }
@@ -52,65 +75,54 @@
         });
     }]);
 
-    app.controller('EmployeeDescriptionController', ['$scope', '$http', '$window', '$routeParams', function($scope, $http, $window, $routeParams) {
-        this.employeeInformations = {};
-        this.defaultEmployeeImage = Global.employeeImageSrc;
+    app.controller('EmployeeDescriptionController', ['$scope', '$http', '$window', '$routeParams', 'GetEmployeeInformations', function($scope, $http, $window, $routeParams, GetEmployeeInformations) {
+        $scope.employeeInformations = {};
+        $scope.defaultEmployeeImage = Global.employeeImageSrc;
 
-        var self = this,
-            employeeId = $routeParams.employeeId;
-
-        this.getEmployeeInformations = function() {
-            $http.get(Global.getEmployeeDescription + employeeId)
-                .success(function(data, status, headers, config) {
-                    self.employeeInformations.name = data[0]['employees']['name'];
-                    self.employeeInformations.address = data[0]['employees']['address'];
-                    self.employeeInformations.email = data[0]['employees']['email'];
-                    self.employeeInformations.jobTitle = data[0]['jobs']['title'];
-                })
-                .error(function(data, status, headers, config) {
-                    console.log('error');
-                });
+        $scope.getEmployeeInformations = function() {
+            GetEmployeeInformations.get(
+                function() {
+                    $scope.employeeInformations = GetEmployeeInformations.getEmployeeInformations();
+                },
+                $routeParams.employeeId
+            );            
         }
+
+        $scope.getEmployeeInformations();
     }]);
 
-    app.controller('AddEmployeeController', ['$scope', '$http', '$location', '$routeParams', 'GetAllJobs', 'Form', function($scope, $http, $location, $routeParams, GetAllJobs, Form){
-        this.addEmployeeForm = {};
+    app.controller('AddEmployeeController', ['$scope', '$http', '$location', '$routeParams', 'GetAllJobs', 'Form', 'GetEmployeeInformations', function($scope, $http, $location, $routeParams, GetAllJobs, Form, GetEmployeeInformations){
+        $scope.addEmployeeForm = {};
 
         var jobs = null,
-            dataObject = null,
-            self = this,
-            employeeId = $routeParams.employeeId;
+            dataObject = null;
 
-        this.getAllJobs = function() {
+        $scope.getAllJobs = function() {
             return jobs;
         }
 
-        this.submitTheForm = function() {
+        $scope.submitTheForm = function() {
             dataObject = {
-                id: employeeId,
-                name: self.addEmployeeForm.name,
-                email: self.addEmployeeForm.email,
-                address: self.addEmployeeForm.address,
-                password: self.addEmployeeForm.password,
-                job_title: self.addEmployeeForm.jobTitle
+                id: $routeParams.employeeId,
+                name: $scope.addEmployeeForm.name,
+                email: $scope.addEmployeeForm.email,
+                address: $scope.addEmployeeForm.address,
+                password: $scope.addEmployeeForm.password,
+                job_title: $scope.addEmployeeForm.jobTitle
             };
 
             Form.sendDataToServer(Global.addEmployee, dataObject);
-            self.addEmployeeForm = {};
+            $scope.addEmployeeForm = {};
             $location.path('/success');
         }
 
-        this.getEmployeeInformation = function() {
-            $http.get(Global.getEmployeeInformations + employeeId)
-                .success(function(data, status, headers, config) {
-                    self.addEmployeeForm.name = data[0]['employees']['name'];
-                    self.addEmployeeForm.email = data[0]['employees']['email'];
-                    self.addEmployeeForm.address = data[0]['employees']['address'];
-                    self.addEmployeeForm.jobTitle = data[0]['employees']['job_title'];
-                })
-                .error(function(data, status, headers, config) {
-                    console.log('error');
-                });
+        $scope.getEmployeeInformations = function() {
+            GetEmployeeInformations.get(
+                function() {
+                    $scope.addEmployeeForm = GetEmployeeInformations.getEmployeeInformations();
+                },
+                $routeParams.employeeId
+            );            
         }
 
         GetAllJobs.get(function() {
