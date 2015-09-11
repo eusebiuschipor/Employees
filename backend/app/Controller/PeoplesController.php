@@ -4,11 +4,10 @@
 
 		// get all people list
 		public function index() {
-			//$this->request->data['organizationId'] = 1;
-
 			$queryString = 'SELECT people.id, people.first_name, people.last_name, people.photo, people.country, people.department, people.brand, jobs.title FROM people '.
 						   'INNER JOIN jobs ON people.jobTitle = jobs.id '.
-						   'WHERE people.organizationId = '.$this->request->data['organizationId'].'';
+						   'WHERE people.organizationId = '.$this->request->data['organizationId'].' '.
+						   'LIMIT '.$this->request->data['limit'].' OFFSET '.$this->request->data['offset'].'';
 
 			$peoples = $this->People->query($queryString);
 			$this->set('peoples', $peoples);

@@ -1,5 +1,5 @@
-(function() {
-    var app = angular.module('Job', []);
+(function(app) {
+    'use strict';
 
 	app.service('GetAllJobs', ['$http', '$window', function ($http, $window) {
         var jobsList = null;
@@ -27,4 +27,4 @@
             return jobsList;
         }
     }]);
-})();
+})(angular.module('Employees'));

@@ -1,4 +1,6 @@
-(function() {
+(function(app) {
+    'use strict'
+
 	app.service('ApiService', ['$http', '$window', '$location', function ($http, $window, $location) {
         this.get = function(url, success, failure) {    
             $http.get(url)          
@@ -6,8 +8,8 @@
                     success(result);                                                       
                 }, function (error) {    
                     if (error.status == '401') {       
-                        $location.path('/401');                                   
-      				else if (failure != null) {   
+                        $location.path('/401');    
+                    } else if (failure != null) {   
                         failure(error);  
                     }     
                 });      
@@ -19,11 +21,11 @@
                     success(result);                                                       
                 }, function (error) {    
                     if (error.status == '401') {       
-                        $location.path('/401');                                   
-      				else if (failure != null) {   
+                        $location.path('/401');      
+                    } else if (failure != null) {   
                         failure(error);  
                     }     
                 });      
       	}
     }]);
-})();
+})(angular.module('Employees'));

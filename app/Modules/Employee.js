@@ -1,62 +1,11 @@
 (function() {
+    'use strict';
+
     var app = angular.module('Employee', []);
 
-    app.service('GetAllEmployees', ['$http', '$window', function ($http, $window) {
-        var employeesList = null;
-        
-        this.get = function(callback) {
-            $http.get(Global.getAllEmployees)
-                .success(function(data, status, headers, config) {
-                    employeesList = new Array();
-
-                    for (var i = 0; i < data.length; i++) {
-                        var employee = new Object();
-                        employee.nr = i + 1;
-                        employee.id = data[i]['employees']['id'];
-                        employee.name = data[i]['employees']['name'];
-                        employee.jobTitle = data[i]['jobs']['title'];
-                        employee.email = data[i]['employees']['email'];
-                        employee.address = data[i]['employees']['address'];
-                        employeesList.push(employee);
-                    }
-                    
-                    callback();
-                })
-                .error(function(data, status, headers, config) {
-                    console.log('error');
-                });
-        }
-
-        this.getEmployeesList = function() {
-            return employeesList;
-        }
-    }]);
-
-    app.service('GetEmployeeInformations', ['$http', '$window', function ($http, $window) {
-        var employeeInformations = {};
-
-        this.get = function(callback, employeeId) {
-            $http.get(Global.getEmployeeInformations + employeeId)
-                .success(function(data, status, headers, config) {
-                    employeeInformations.name = data[0]['employees']['name'];
-                    employeeInformations.email = data[0]['employees']['email'];
-                    employeeInformations.address = data[0]['employees']['address'];
-                    employeeInformations.jobTitle = data[0]['employees']['job_title'];
-
-                    callback();
-                })
-                .error(function(data, status, headers, config) {
-                    console.log('error');
-                });
-        }
-
-        this.getEmployeeInformations =  function() {
-            return employeeInformations;
-        }
-    }]);
-
     app.controller('EmployeesController', ['$scope', '$http', '$window', 'GetAllEmployees', 'Form', function($scope, $http, $window, GetAllEmployees, Form) {
-        var employees = new Array();
+        var employees = new Array()
+            offset = 0;
 
         $scope.getAllEmployees = function() {
             return employees;
@@ -69,6 +18,17 @@
 
             Form.sendDataToServer(Global.deleteEmployee, dataObject);
         }
+
+        $window.onscroll = function() {
+            if (($(window).scrollTop() + $(window).height() >= $(document).height() - 10)) {
+                GetAllEmployees.get(
+                    function() {
+                        employees = GetAllEmployees.getEmployeesList();
+                    },
+                    offset += 9
+                );
+            }
+        };
 
         GetAllEmployees.get(function() {
             employees = GetAllEmployees.getEmployeesList();

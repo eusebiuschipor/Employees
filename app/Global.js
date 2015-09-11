@@ -7,7 +7,7 @@ Global.host = 'http://localhost/Employees/';
 Global.templatesUrl = 'templates/';
 
 // MODULES:
-Global.viewsUrl = 'app/View/';
+Global.viewsUrl = 'app/Views/';
 
 // SCRIPTS:
 Global.scripts = 'scripts/';

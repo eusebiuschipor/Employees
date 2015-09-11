@@ -1,5 +1,5 @@
-(function() {
-	var app = angular.module('Employees');
+(function(app) {
+	'use strict';
 
     app.config(function($routeProvider) {
         $routeProvider
@@ -43,4 +43,4 @@
                 redirectTo: Global.pageNotFound
             });
     });
-})();
+})(angular.module('Employees'));

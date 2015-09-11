@@ -1,5 +1,5 @@
-(function() {
-    var app = angular.module('Form', []);
+(function(app) {
+    'use strict';
 
     app.service('Form', ['$http', '$window', '$route', function ($http, $window, $route) {
         var self = this,
@@ -19,4 +19,4 @@
             });
         }
     }]);
-})();
+})(angular.module('Employees'));
