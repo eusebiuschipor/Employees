@@ -4,8 +4,10 @@
     var app = angular.module('Employee', []);
 
     app.controller('EmployeesController', ['$scope', '$http', '$window', 'GetAllEmployees', 'Form', function($scope, $http, $window, GetAllEmployees, Form) {
-        var employees = new Array()
-            offset = 0;
+        var employees = new Array(),
+            offset = 0,
+            limit = 16,
+            newEmployeesList = null;
 
         $scope.getAllEmployees = function() {
             return employees;
@@ -19,20 +21,27 @@
             Form.sendDataToServer(Global.deleteEmployee, dataObject);
         }
 
+        $scope.callbackGetAllEmployees = function() {
+            newEmployeesList = null;
+
+            if (employees.length == 0) {
+                employees = GetAllEmployees.getEmployeesList();
+            } else {
+                newEmployeesList = GetAllEmployees.getEmployeesList();
+
+                for (var i = 0; i < newEmployeesList.length; i++) {
+                    employees.push(newEmployeesList[i]);
+                }
+            }
+        }
+
         $window.onscroll = function() {
             if (($(window).scrollTop() + $(window).height() >= $(document).height() - 10)) {
-                GetAllEmployees.get(
-                    function() {
-                        employees = GetAllEmployees.getEmployeesList();
-                    },
-                    offset += 9
-                );
+                GetAllEmployees.get($scope.callbackGetAllEmployees, limit, offset += limit);
             }
         };
 
-        GetAllEmployees.get(function() {
-            employees = GetAllEmployees.getEmployeesList();
-        });
+        GetAllEmployees.get($scope.callbackGetAllEmployees, limit, offset);
     }]);
 
     app.controller('EmployeeDescriptionController', ['$scope', '$http', '$window', '$routeParams', 'GetEmployeeInformations', function($scope, $http, $window, $routeParams, GetEmployeeInformations) {

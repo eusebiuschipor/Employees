@@ -4,11 +4,16 @@
     app.service('GetAllEmployees', ['$http', '$window', function ($http, $window) {
         var employeesList = null;
         
-        this.get = function(callback) {
-            $http.get(Global.getAllEmployees)
+        this.get = function(callback, limit, offset) {
+            $http.get(
+                Global.getAllEmployees, {
+                    params: {
+                        limit: limit, 
+                        offset: offset
+                    }
+                })
                 .success(function(data, status, headers, config) {
                     employeesList = new Array();
-
                     for (var i = 0; i < data.length; i++) {
                         var employee = new Object();
                         employee.nr = i + 1;

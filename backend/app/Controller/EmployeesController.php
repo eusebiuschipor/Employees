@@ -5,7 +5,8 @@
 		// get all employees list
 		public function index() {
 			$queryString = 	'SELECT employees.id, employees.name, employees.email, employees.address, jobs.title FROM employees '.
-						   	'INNER JOIN jobs ON employees.job_title = jobs.id ';
+						   	'INNER JOIN jobs ON employees.job_title = jobs.id '.
+						   	'LIMIT '.$_GET['limit'].' OFFSET '.$_GET['offset'].';';
 
 			$employees = $this->Employee->query($queryString);
 			$this->set('employees', $employees);

@@ -3,11 +3,11 @@
 		public $components = array('RequestHandler');
 
 		// get all people list
-		public function index() {
+		public function index($limit = null, $offset = null) {
 			$queryString = 'SELECT people.id, people.first_name, people.last_name, people.photo, people.country, people.department, people.brand, jobs.title FROM people '.
 						   'INNER JOIN jobs ON people.jobTitle = jobs.id '.
 						   'WHERE people.organizationId = '.$this->request->data['organizationId'].' '.
-						   'LIMIT '.$this->request->data['limit'].' OFFSET '.$this->request->data['offset'].'';
+						   'LIMIT 1 OFFSET 0';
 
 			$peoples = $this->People->query($queryString);
 			$this->set('peoples', $peoples);
