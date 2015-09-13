@@ -6,7 +6,7 @@
     app.controller('EmployeesController', ['$scope', '$http', '$window', 'GetAllEmployees', 'Form', function($scope, $http, $window, GetAllEmployees, Form) {
         var employees = new Array(),
             offset = 0,
-            limit = 16,
+            limit = 11,
             newEmployeesList = null;
 
         $scope.getAllEmployees = function() {

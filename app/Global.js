@@ -26,9 +26,6 @@ Global.employeeImageSrc = 'assets/images/default.png';
 // Jobs Module
 Global.getAllJobs = Global.host + Global.backend + 'jobs/';
 
-// Upload files
-Global.uploadPeoplePhoto = Global.host + Global.scripts + 'upload-people-photo.php';
-
 // HTTP status codes
 Global.httpUnauthorized = 401;
 Global.httpOk = 200;

@@ -14,6 +14,7 @@
                 })
                 .success(function(data, status, headers, config) {
                     employeesList = new Array();
+
                     for (var i = 0; i < data.length; i++) {
                         var employee = new Object();
                         employee.nr = i + 1;
