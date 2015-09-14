@@ -60,7 +60,7 @@
         $scope.getEmployeeInformations();
     }]);
 
-    app.controller('AddEmployeeController', ['$scope', '$http', '$location', '$routeParams', 'GetAllJobs', 'Form', 'GetEmployeeInformations', function($scope, $http, $location, $routeParams, GetAllJobs, Form, GetEmployeeInformations){
+    app.controller('AddEmployeeController', ['$scope', '$http', '$location', '$routeParams', 'GetAllJobs', 'Form', 'GetEmployeeInformations', function($scope, $http, $location, $routeParams, GetAllJobs, Form, GetEmployeeInformations) {
         $scope.addEmployeeForm = {};
 
         var jobs = null,

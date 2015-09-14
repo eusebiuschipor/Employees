@@ -12,6 +12,12 @@ body {
     background-color: #f8f8f8;
 }
 
+/*
+navigation {
+    height: 100%;
+}
+*/
+
 #wrapper {
     width: 100%;
     background-color: white;
@@ -500,7 +506,7 @@ table.default-table .column-3 {
 
 .search {
     font-weight: bold;
-    margin-top: 10px;
+    /*margin-top: 10px;*/
     margin-bottom: 10px;
     width: 100%;
 }
