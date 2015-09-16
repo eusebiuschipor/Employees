@@ -14,7 +14,7 @@
         }
 
         $scope.deleteEmployee = function(employeeId) {
-            dataObject = {
+            var dataObject = {
                 id: employeeId
             }
 
@@ -44,14 +44,14 @@
         GetAllEmployees.get($scope.callbackGetAllEmployees, limit, offset);
     }]);
 
-    app.controller('EmployeeDescriptionController', ['$scope', '$http', '$window', '$routeParams', 'GetEmployeeInformations', function($scope, $http, $window, $routeParams, GetEmployeeInformations) {
+    app.controller('EmployeeDescriptionController', ['$scope', '$http', '$window', '$routeParams', 'ViewEmployee', function($scope, $http, $window, $routeParams, ViewEmployee) {
         $scope.employeeInformations = {};
         $scope.defaultEmployeeImage = Global.employeeImageSrc;
 
         $scope.getEmployeeInformations = function() {
-            GetEmployeeInformations.get(
+            ViewEmployee.get(
                 function() {
-                    $scope.employeeInformations = GetEmployeeInformations.getEmployeeInformations();
+                    $scope.employeeInformations = ViewEmployee.getEmployeeInformations();
                 },
                 $routeParams.employeeId
             );            

@@ -1,37 +1,44 @@
 <div id="wrapper">
 
     <div id="page-wrapper" ng-controller="EmployeesController as employees">
-
-    	<div class="search">
+		<div class="search">
     		<div class="filter">
 		 		<label for="name">Name:</label> 	
 		 		<input type="text" ng-model="search.name" class="form-control">
 		 	</div>
 	 	</div> 
 
-        <table data-toggle="table" class="default-table center">
-		    <thead>
-			    <tr>
-			        <th>Nr.</th>
-			        <th>Name</th>
-			        <th>Email</th>
-			        <th>Job Title</th>
-			        <th>Address</th>
-			    </tr>
-		    </thead>
-		    <tbody>
-			    <tr ng-repeat="employee in getAllEmployees() | filter:search">
-			    	<td class="column-1">{{ employee.nr }}</td>
-			        <td class="column-2">
-			        	<a href="#/edit-employee/{{ employee.id }}">
-			        		{{ employee.name }}
-			        	</a>
-			        </td>
-			        <td class="column-1">{{ employee.email }}</td>
-			        <td class="column-2">{{ employee.jobTitle }}</td>
-			        <td class="column-2">{{ employee.address }}</td>
-			    </tr>
-		    </tbody>
-		</table>
+	 	<div id="page_content_inner"> 
+        	<div class="md-card-list-wrapper" id="mailbox">
+            	<div class="uk-width-large-8-10 uk-container-center">
+                	<div class="md-card-list">
+                    	<div class="md-card-list-header heading_list">Employees list</div>
+                    	<ul>
+                        	<li ng-repeat="employee in getAllEmployees() | filter:search" class="background-gray">
+                        		<a ng-href="#/edit-employee/{{ employee.id }}">
+	                            	<span class="md-card-list-item-date address"> 
+	                            		{{ employee.address }}
+	                            	</span>
+		                            <div class="md-card-list-item-avatar-wrapper">
+		                                <span class="md-card-list-item-avatar md-bg-light-green"> 		
+		                                	{{ employee.name.charAt(0) }} 
+		                                </span>
+		                            </div>
+		                            <div class="md-card-list-item-sender name">
+		                                <span> {{ employee.name }} </span>
+		                            </div>
+		                            <div class="md-card-list-item-sender">
+		                                <span> {{ employee.email }} </span>
+		                            </div>
+		                            <div class="md-card-list-item-sender">
+		                                <span> {{ employee.jobTitle }} </span>
+		                            </div>
+		                        </a>
+                        	</li>
+                    	</ul>
+                	</div>
+            	</div>
+        	</div>
+     	</div> 
     </div>
 </div>
