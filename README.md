@@ -5,3 +5,6 @@
 #Technologies used:
 #- AngularJS, jQuery, HMTL5, CSS3 for frontend.
 #- CakePHP, MySQL for backend.
+<br/><br/>
+
+Author: Eusebiu Schipor
